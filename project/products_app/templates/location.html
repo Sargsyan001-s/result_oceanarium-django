@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как нас найти - Океанариум</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0077b6 0%, #90e0ef 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #006994;
+            color: #ffffff;
+            padding: 0 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background-color: #00a8e8;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            z-index: 1000;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+        }
+
+        .dropdown-menu li a {
+            color: #333333;
+            padding: 12px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-menu li:last-child a {
+            border-bottom: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f4f9fc;
+            color: #006994;
+            padding-left: 25px;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .location-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .location-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-block {
+            text-align: center;
+            padding: 20px;
+            background: #f4f9fc;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-block:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-block h3 {
+            color: #0077b6;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .info-block p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #caf0f8 0%, #90e0ef 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0077b6;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 20px;
+            border: 2px dashed #0077b6;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/info/" class="logo">Океанариум</a>
+            <ul class="nav-links">
+                <li><a href="/info/">Главная</a></li>
+                <li class="dropdown">
+                    <a href="/about/">О компании ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/contacts/">Контакты</a></li>
+                        <li><a href="/location/">Как нас найти</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="/products/">Товары ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/categories/">Категории</a></li>
+                        <li><a href="/products/">Все товары</a></li>
+                    </ul>
+                </li>
+                <li><a href="/cart/">Корзина</a></li>
+                <li><a href="/inhabitants/">Обитатели</a></li>
+                <li><a href="/schedule/">Расписание</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Наше местоположение</h1>
+        <div class="location-container">
+            <div class="location-info">
+                <div class="info-block">
+                    <h3>Адрес</h3>
+                    <p>г. Москва, ул. Морская, д. 15, стр. 2</p>
+                </div>
+                <div class="info-block">
+                    <h3>Метро</h3>
+                    <p>ст. "Океанская"<br>5 минут пешком</p>
+                </div>
+                <div class="info-block">
+                    <h3>Парковка</h3>
+                    <p>Бесплатная парковка<br>на 200 мест</p>
+                </div>
+                <div class="info-block">
+                    <h3>Режим работы</h3>
+                    <p>Ежедневно<br>с 10:00 до 22:00</p>
+                </div>
+            </div>
+            <div class="map-placeholder">
+                Здесь будет интерактивная карта(Не будет)
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Океанариум. Все права защищены.</p>
+        <p>Погружение в мир морских глубин</p>
+    </footer>
+</body>
+</html>

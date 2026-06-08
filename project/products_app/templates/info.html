@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Океанариум - Главная</title>
+    
+    <style>
+        :root {
+            --primary-color: #006994;
+            --secondary-color: #00a8e8;
+            --accent-color: #ff7f50;
+            --text-color: #333333;
+            --bg-color: #f4f9fc;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            z-index: 1000;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+        }
+
+        .dropdown-menu li a {
+            color: var(--text-color);
+            padding: 12px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-menu li:last-child a {
+            border-bottom: none;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            padding-left: 25px;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+
+        .btn:hover {
+            background-color: #e06b40;
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/info/" class="logo">Океанариум</a>
+            <ul class="nav-links">
+                <li><a href="/info/">Главная</a></li>
+                <li class="dropdown">
+                    <a href="/about/">О компании ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/contacts/">Контакты</a></li>
+                        <li><a href="/location/">Как нас найти</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="/products/">Товары ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/categories/">Категории</a></li>
+                        <li><a href="/products/">Все товары</a></li>
+                    </ul>
+                </li>
+                <li><a href="/cart/">Корзина</a></li>
+                <li><a href="/inhabitants/">Обитатели</a></li>
+                <li><a href="/schedule/">Расписание</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Добро пожаловать в Океанариум!</h1>
+        <p>Здесь вы сможете узнать о наших обитателях, посмотреть видео с аквариумами и получить информацию о расписании сеансов.</p>
+        <div>
+            <a href="/schedule/" class="btn">Посмотреть расписание</a>
+            <a href="/inhabitants/" class="btn">Наши обитатели</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Океанариум. Все права защищены.</p>
+        <p>Погружение в мир морских глубин</p>
+    </footer>
+</body>
+</html>
