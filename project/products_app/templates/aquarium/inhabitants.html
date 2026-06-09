@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Все товары - Океанариум</title>
+    <title>Обитатели - Океанариум</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #69c7f6 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -152,40 +152,23 @@
 
         .card img {
             width: 100%;
-            height: 250px;
+            height: 280px;
             object-fit: cover;
             background: #f0f0f0;
         }
 
         .card h3 {
             padding: 20px 20px 10px;
-            color: #333;
-            font-size: 1.3rem;
+            color: #0077b6;
+            font-size: 1.4rem;
         }
 
         .card p {
-            padding: 0 20px 20px;
-            color: #80b9ff;
-            font-size: 1.5rem;
-            font-weight: bold;
+            padding: 0 20px 25px;
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.5;
             flex: 1;
-        }
-
-        .btn {
-            display: block;
-            margin: 0 20px 20px;
-            padding: 12px;
-            background: linear-gradient(135deg, #000000 0%, #000000 100%);
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: opacity 0.3s ease;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
         }
 
         footer {
@@ -198,6 +181,45 @@
 
         footer p {
             margin: 5px 0;
+        }
+
+        .add-link {
+            display: inline-block;
+            background-color: #ff7f50;
+            color: #fff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .add-link:hover {
+            background-color: #e06b40;
+        }
+
+        .card-actions {
+            padding: 0 20px 20px;
+        }
+
+        .card-actions a {
+            color: #006994;
+            text-decoration: none;
+            margin-right: 15px;
+            font-weight: 500;
+        }
+
+        .card-actions a:hover {
+            text-decoration: underline;
+        }
+
+        .card h3 a {
+            color: #0077b6;
+            text-decoration: none;
+        }
+
+        .card h3 a:hover {
+            color: #006994;
         }
     </style>
 </head>
@@ -229,26 +251,24 @@
     </header>
 
     <main>
-        <h1>Сувенирная лавка</h1>
+        <h1>Наши обитатели</h1>
+        <div style="text-align: center;">
+            <a href="{% url 'inhabitant_create' %}" class="add-link">Добавить новую позицию</a>
+        </div>
         <div class="grid-container">
+            {% for inhabitant in inhabitant_list %}
             <div class="card">
-                <img src="https://avatars.mds.yandex.net/i?id=4082002390e94269affed13be27dcbc17e1bdc58-4502909-images-thumbs&n=13" alt="Плюшевая акула">
-                <h3>Плюшевая акула</h3>
-                <p>1 500 ₽</p>
-                <a href="/cart/" class="btn">В корзину</a>
+                {% if inhabitant.photo %}
+                <img src="{{ inhabitant.photo.url }}" alt="{{ inhabitant.name }}">
+                {% endif %}
+                <h3><a href="{% url 'inhabitant_detail' inhabitant.pk %}">{{ inhabitant.name }}</a></h3>
+                <p>{{ inhabitant.description }}</p>
+                <div class="card-actions">
+                    <a href="{% url 'inhabitant_update' inhabitant.pk %}">Редактировать</a>
+                    <a href="{% url 'inhabitant_delete' inhabitant.pk %}">Удалить</a>
+                </div>
             </div>
-            <div class="card">
-                <img src="https://avatars.mds.yandex.net/get-mpic/13072406/2a0000019c07b0144442d0e50e36549bb9a1/orig" alt="Кружка Синий кит">
-                <h3>Кружка "Синий кит"</h3>
-                <p>600 ₽</p>
-                <a href="/cart/" class="btn">В корзину</a>
-            </div>
-            <div class="card">
-                <img src="https://avatars.mds.yandex.net/i?id=17c5495f2f42a8eeebd879246ac2a3f5_sr-7555069-images-thumbs&n=13" alt="VIP-билет">
-                <h3>VIP-билет (без очереди)</h3>
-                <p>2 500 ₽</p>
-                <a href="/cart/" class="btn">В корзину</a>
-            </div>
+            {% endfor %}
         </div>
     </main>
 

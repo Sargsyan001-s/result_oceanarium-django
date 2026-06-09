@@ -1,10 +1,4 @@
 from django.urls import path
-from .views import *
-
-urlpatterns = [
-    path('info/',info_view, name='info_view'),
-]
-from django.urls import path
 from . import views
 
 urlpatterns = [
@@ -12,9 +6,30 @@ urlpatterns = [
     path('about/', views.about_view, name='about'),
     path('contacts/', views.contacts_view, name='contacts'),
     path('location/', views.location_view, name='location'),
-    path('products/', views.products_view, name='products'),
-    path('categories/', views.categories_view, name='categories'),
     path('cart/', views.cart_view, name='cart'),
-    path('inhabitants/', views.inhabitants_view, name='inhabitants'),
-    path('schedule/', views.schedule_view, name='schedule'),
+    path('categories/', views.CategoryListView.as_view(), name='category_list'),
+    path("categories/<int:pk>/", views.CategoryDetailView.as_view(), name='category_detail'),
+    path("categories/create/", views.CategoryCreateView.as_view(), name='category_create'),
+    path("categories/<int:pk>/update/", views.CategoryUpdateView.as_view(), name='category_update'),
+    path("categories/<int:pk>/delete/", views.CategoryDeleteView.as_view(), name='category_delete'),
+    path('products/', views.ProductListView.as_view(), name='product_list'),
+    path("products/<int:pk>/", views.ProductDetailView.as_view(), name='product_detail'),
+    path("products/create/", views.ProductCreateView.as_view(), name='product_create'),
+    path("products/<int:pk>/update/", views.ProductUpdateView.as_view(), name='product_update'),
+    path("products/<int:pk>/delete/", views.ProductDeleteView.as_view(), name='product_delete'),
+    path('inhabitants/', views.InhabitantListView.as_view(), name='inhabitant_list'),
+    path("inhabitants/<int:pk>/", views.InhabitantDetailView.as_view(), name='inhabitant_detail'),
+    path("inhabitants/create/", views.InhabitantCreateView.as_view(), name='inhabitant_create'),
+    path("inhabitants/<int:pk>/update/", views.InhabitantUpdateView.as_view(), name='inhabitant_update'),
+    path("inhabitants/<int:pk>/delete/", views.InhabitantDeleteView.as_view(), name='inhabitant_delete'),
+    path('aquariums/', views.AquariumListView.as_view(), name='aquarium_list'),
+    path("aquariums/<int:pk>/", views.AquariumDetailView.as_view(), name='aquarium_detail'),
+    path("aquariums/create/", views.AquariumCreateView.as_view(), name='aquarium_create'),
+    path("aquariums/<int:pk>/update/", views.AquariumUpdateView.as_view(), name='aquarium_update'),
+    path("aquariums/<int:pk>/delete/", views.AquariumDeleteView.as_view(), name='aquarium_delete'),
+    path('schedule/', views.ScheduleEventListView.as_view(), name='schedule_list'),
+    path("schedule/<int:pk>/", views.ScheduleEventDetailView.as_view(), name='schedule_detail'),
+    path("schedule/create/", views.ScheduleEventCreateView.as_view(), name='schedule_create'),
+    path("schedule/<int:pk>/update/", views.ScheduleEventUpdateView.as_view(), name='schedule_update'),
+    path("schedule/<int:pk>/delete/", views.ScheduleEventDeleteView.as_view(), name='schedule_delete'),
 ]

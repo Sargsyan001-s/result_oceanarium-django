@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Категории - Океанариум</title>
-    
+    <title>Обитатель - Океанариум</title>
     <style>
         :root {
             --primary-color: #006994;
@@ -14,13 +13,7 @@
             --bg-color: #f4f9fc;
             --white: #ffffff;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
@@ -29,14 +22,12 @@
             flex-direction: column;
             min-height: 100vh;
         }
-
         header {
             background-color: var(--primary-color);
             color: var(--white);
             padding: 0 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
         nav {
             display: flex;
             justify-content: space-between;
@@ -44,29 +35,15 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .logo {
             font-size: 1.6rem;
             font-weight: bold;
             color: var(--white);
             text-decoration: none;
             padding: 15px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links > li {
-            position: relative;
-        }
-
+        .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
+        .nav-links > li { position: relative; }
         .nav-links a {
             color: var(--white);
             text-decoration: none;
@@ -75,11 +52,7 @@
             transition: background-color 0.3s ease;
             font-weight: 500;
         }
-
-        .nav-links a:hover {
-            background-color: var(--secondary-color);
-        }
-
+        .nav-links a:hover { background-color: var(--secondary-color); }
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -89,40 +62,23 @@
             min-width: 200px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
             list-style: none;
-            padding: 0;
-            margin: 0;
             z-index: 1000;
             border-radius: 0 0 8px 8px;
             overflow: hidden;
         }
-
         .dropdown-menu li a {
             color: var(--text-color);
             padding: 12px 20px;
             border-bottom: 1px solid #f0f0f0;
             font-size: 0.95rem;
         }
-
-        .dropdown-menu li:last-child a {
-            border-bottom: none;
-        }
-
+        .dropdown-menu li:last-child a { border-bottom: none; }
         .dropdown-menu li a:hover {
             background-color: var(--bg-color);
             color: var(--primary-color);
             padding-left: 25px;
         }
-
-        .dropdown:hover .dropdown-menu {
-            display: block;
-            animation: fadeIn 0.2s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        .dropdown:hover .dropdown-menu { display: block; }
         main {
             flex: 1;
             max-width: 1200px;
@@ -130,46 +86,79 @@
             padding: 0 20px;
             width: 100%;
         }
-
         h1 {
             color: var(--primary-color);
             font-size: 2.2rem;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-align: center;
         }
-
-        /* === СПИСОК КАТЕГОРИЙ === */
-        .categories-list {
-            list-style: none;
-            padding: 0;
-            max-width: 600px;
+        .content-box {
+            max-width: 700px;
             margin: 0 auto;
-        }
-
-        .categories-list li {
-            margin: 20px 0;
-        }
-
-        .categories-list a {
-            display: block;
-            padding: 20px 30px;
             background-color: var(--white);
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 1.3rem;
-            font-weight: 600;
-            border-radius: 10px;
+            padding: 30px;
+            border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
         }
-
-        .categories-list a:hover {
-            transform: translateX(10px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            background-color: var(--secondary-color);
+        form p { margin: 15px 0; text-align: left; }
+        form label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        form input[type="checkbox"] { width: auto; margin-right: 8px; }
+        form input[type="text"],
+        form input[type="number"],
+        form input[type="time"],
+        form input[type="date"],
+        form input[type="file"],
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        form textarea { min-height: 120px; resize: vertical; }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
             color: var(--white);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 10px 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
         }
+        .btn:hover { background-color: #e06b40; }
+        .btn-secondary { background-color: var(--primary-color); }
+        .btn-secondary:hover { background-color: #005577; }
+        .actions { text-align: center; margin-top: 20px; }
 
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin-bottom: 12px;
+        }
+        .detail-img {
+            display: block;
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 20px auto;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+        }
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
         footer {
             background-color: var(--primary-color);
             color: var(--white);
@@ -177,17 +166,10 @@
             padding: 25px 20px;
             margin-top: auto;
         }
-
-        footer p {
-            margin: 5px 0;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
+        footer p { margin: 5px 0; font-size: 0.9rem; opacity: 0.9; color: var(--white); }
     </style>
 </head>
 <body>
-
-
     <header>
         <nav>
             <a href="/info/" class="logo">Океанариум</a>
@@ -214,21 +196,24 @@
         </nav>
     </header>
 
-
     <main>
-        <h1>Категории товаров</h1>
-        <ul class="categories-list">
-            <li><a href="/products/"> Игрушки и плюшевые звери</a></li>
-            <li><a href="/products/">Одежда и аксессуары</a></li>
-            <li><a href="/products/">Билеты и подарочные сертификаты</a></li>
-            <li><a href="/products/">Книги об океане</a></li>
-        </ul>
+        <h1>{% if form.instance.pk %}Редактировать позицию{% else %}Добавить новую позицию{% endif %}</h1>
+        <div class="content-box">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="actions">
+                    <button type="submit" class="btn">Сохранить</button>
+                    <a href="{% url 'inhabitant_list' %}" class="btn btn-secondary">Вернуться к списку обитателей</a>
+                </div>
+            </form>
+        </div>
     </main>
+
 
     <footer>
         <p>&copy; 2026 Океанариум. Все права защищены.</p>
         <p>Погружение в мир морских глубин</p>
     </footer>
-
 </body>
 </html>
