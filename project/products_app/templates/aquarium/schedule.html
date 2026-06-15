@@ -7,14 +7,18 @@
 
 {% block content %}
 <h1>Расписание шоу и кормлений</h1>
+{% if perms.products_app.add_scheduleevent %}
 <a href="{% url 'schedule_create' %}" class="btn">Добавить новую позицию</a>
+{% endif %}
 <table>
     <thead>
         <tr>
             <th>Время</th>
             <th>Событие</th>
             <th>Место</th>
+            {% if perms.products_app.change_scheduleevent or perms.products_app.delete_scheduleevent %}
             <th>Действия</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -23,10 +27,16 @@
             <td>{{ schedule.event_time }}</td>
             <td><a href="{% url 'schedule_detail' schedule.pk %}">{{ schedule.name }}</a></td>
             <td>{{ schedule.location }}</td>
+            {% if perms.products_app.change_scheduleevent or perms.products_app.delete_scheduleevent %}
             <td>
+                {% if perms.products_app.change_scheduleevent %}
                 <a href="{% url 'schedule_update' schedule.pk %}">Редактировать</a>
+                {% endif %}
+                {% if perms.products_app.delete_scheduleevent %}
                 <a href="{% url 'schedule_delete' schedule.pk %}">Удалить</a>
+                {% endif %}
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>

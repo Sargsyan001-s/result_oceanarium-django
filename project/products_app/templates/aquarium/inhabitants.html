@@ -7,7 +7,9 @@
 
 {% block content %}
 <h1>Наши обитатели</h1>
+{% if perms.products_app.add_inhabitant %}
 <a href="{% url 'inhabitant_create' %}" class="btn">Добавить новую позицию</a>
+{% endif %}
 <div class="item-list">
     {% for inhabitant in inhabitant_list %}
     <div class="item-card">
@@ -16,8 +18,12 @@
         {% endif %}
         <h3><a href="{% url 'inhabitant_detail' inhabitant.pk %}">{{ inhabitant.name }}</a></h3>
         <p>{{ inhabitant.description }}</p>
+        {% if perms.products_app.change_inhabitant %}
         <a href="{% url 'inhabitant_update' inhabitant.pk %}">Редактировать</a>
+        {% endif %}
+        {% if perms.products_app.delete_inhabitant %}
         <a href="{% url 'inhabitant_delete' inhabitant.pk %}">Удалить</a>
+        {% endif %}
     </div>
     {% endfor %}
 </div>

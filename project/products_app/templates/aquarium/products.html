@@ -7,7 +7,9 @@
 
 {% block content %}
 <h1>Сувенирная лавка</h1>
+{% if perms.products_app.add_product %}
 <a href="{% url 'product_create' %}" class="btn">Добавить новую позицию</a>
+{% endif %}
 <div class="item-list">
     {% for product in product_list %}
     <div class="item-card">
@@ -16,9 +18,15 @@
         {% endif %}
         <h3><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></h3>
         <p>{{ product.price }} ₽</p>
+        {% if perms.products_app.change_product %}
         <a href="{% url 'product_update' product.pk %}">Редактировать</a>
+        {% endif %}
+        {% if perms.products_app.delete_product %}
         <a href="{% url 'product_delete' product.pk %}">Удалить</a>
+        {% endif %}
+        {% if user.is_authenticated %}
         <a href="/cart/" class="btn">В корзину</a>
+        {% endif %}
     </div>
     {% endfor %}
 </div>

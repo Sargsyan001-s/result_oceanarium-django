@@ -7,9 +7,56 @@
 
 {% block content %}
 <h1>Удалить позицию "{{ category.name }}"?</h1>
+
+{% if has_related %}
+<div class="detail-box">
+    <p><strong>Удаление невозможно.</strong> К категории привязаны записи в других таблицах. Сначала нужно удалить их или назначить другую категорию.</p>
+
+    {% if related_aquariums %}
+    <h3>Аквариумы</h3>
+    <ul>
+        {% for item in related_aquariums %}
+        <li><a href="{% url 'aquarium_detail' item.pk %}">{{ item }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if related_products %}
+    <h3>Товары</h3>
+    <ul>
+        {% for item in related_products %}
+        <li><a href="{% url 'product_detail' item.pk %}">{{ item }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if related_inhabitants %}
+    <h3>Обитатели</h3>
+    <ul>
+        {% for item in related_inhabitants %}
+        <li><a href="{% url 'inhabitant_detail' item.pk %}">{{ item }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if related_schedule %}
+    <h3>Расписание</h3>
+    <ul>
+        {% for item in related_schedule %}
+        <li><a href="{% url 'schedule_detail' item.pk %}">{{ item }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+<div class="page-actions">
+    <a href="{% url 'category_detail' category.pk %}" class="btn btn-secondary">Вернуться к категории</a>
+    <a href="{% url 'category_list' %}" class="btn btn-secondary">Вернуться к списку категорий</a>
+</div>
+{% else %}
 <form method="post" class="delete-form">
     {% csrf_token %}
     <button type="submit" class="btn btn-delete">Удалить</button>
     <a href="{% url 'category_list' %}" class="btn btn-secondary">Вернуться к списку категорий</a>
 </form>
+{% endif %}
 {% endblock %}

@@ -1,28 +1,34 @@
- <header>
-        <nav>
-            <a href="/info/" class="logo">Океанариум</a>
-            <ul class="nav-links">
-                <li><a href="/info/">Главная</a></li>
-                <li class="dropdown">
-                    <a href="/about/">О компании ▾</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/contacts/">Контакты</a></li>
-                        <li><a href="/location/">Как нас найти</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="/products/">Товары ▾</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/categories/">Категории</a></li>
-                        <li><a href="/products/">Все товары</a></li>
-                    </ul>
-                </li>
-                <li><a href="/cart/">Корзина</a></li>
-                <li><a href="/inhabitants/">Обитатели</a></li>
-                <li><a href="/aquariums/">Аквариумы</a></li>
-                <li><a href="/schedule/">Расписание</a></li>
-            </ul>
-        </nav>
-    </header>
-
-   
+<header>
+    <nav>
+        <a href="/info/" class="logo">Океанариум</a>
+        <ul class="nav-links">
+            <li><a href="/info/">Главная</a></li>
+            <li class="dropdown">
+                <a href="/about/">О компании ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/contacts/">Контакты</a></li>
+                    <li><a href="/location/">Как нас найти</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="/products/">Товары ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/categories/">Категории</a></li>
+                    <li><a href="/products/">Все товары</a></li>
+                </ul>
+            </li>
+            <li><a href="/cart/">Корзина</a></li>
+            <li><a href="/inhabitants/">Обитатели</a></li>
+            <li><a href="/aquariums/">Аквариумы</a></li>
+            <li><a href="/schedule/">Расписание</a></li>
+        </ul>
+        <div class="d-flex gap-2">
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout_page' %}" class="btn btn-outline-secondary btn-sm">Выйти</a>
+            {% else %}
+            <a href="{% url 'login_page' %}" class="btn btn-outline-success btn-sm">Войти</a>
+            <a href="{% url 'registration_page' %}" class="btn btn-outline-primary btn-sm">Регистрация</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>

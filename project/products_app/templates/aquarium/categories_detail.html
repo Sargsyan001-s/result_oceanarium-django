@@ -10,8 +10,12 @@
 <div class="detail-box">
     <p>{{ category.description }}</p>
     <div class="detail-actions">
+        {% if perms.products_app.change_category %}
         <a href="{% url 'category_update' category.pk %}" class="btn">Редактировать</a>
+        {% endif %}
+        {% if perms.products_app.delete_category %}
         <a href="{% url 'category_delete' category.pk %}" class="btn btn-delete">Удалить</a>
+        {% endif %}
         <a href="{% url 'category_list' %}" class="btn btn-secondary">Вернуться к списку категорий</a>
     </div>
 </div>

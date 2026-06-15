@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
-
+from .views import *
 urlpatterns = [
-    path('info/', views.info_view, name='info'),
+    path('info/', views.info_view, name='info_view'),
     path('about/', views.about_view, name='about'),
     path('contacts/', views.contacts_view, name='contacts'),
     path('location/', views.location_view, name='location'),
@@ -32,4 +32,7 @@ urlpatterns = [
     path("schedule/create/", views.ScheduleEventCreateView.as_view(), name='schedule_create'),
     path("schedule/<int:pk>/update/", views.ScheduleEventUpdateView.as_view(), name='schedule_update'),
     path("schedule/<int:pk>/delete/", views.ScheduleEventDeleteView.as_view(), name='schedule_delete'),
+    path("login/", login_user, name='login_page'),
+    path("registration/", registration_user, name='registration_page'),
+    path("logout/", logout_user, name='logout_page')
 ]

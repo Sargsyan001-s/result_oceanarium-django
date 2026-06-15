@@ -19,8 +19,12 @@
     <img src="{{ inhabitant.photo.url }}" alt="{{ inhabitant.name }}">
     {% endif %}
     <div class="detail-actions">
+        {% if perms.products_app.change_inhabitant %}
         <a href="{% url 'inhabitant_update' inhabitant.pk %}" class="btn">Редактировать</a>
+        {% endif %}
+        {% if perms.products_app.delete_inhabitant %}
         <a href="{% url 'inhabitant_delete' inhabitant.pk %}" class="btn btn-delete">Удалить</a>
+        {% endif %}
         <a href="{% url 'inhabitant_list' %}" class="btn btn-secondary">Вернуться к списку обитателей</a>
     </div>
 </div>

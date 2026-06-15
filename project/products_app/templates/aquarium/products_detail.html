@@ -19,8 +19,12 @@
     <img src="{{ product.photo.url }}" alt="{{ product.name }}">
     {% endif %}
     <div class="detail-actions">
+        {% if perms.products_app.change_product %}
         <a href="{% url 'product_update' product.pk %}" class="btn">Редактировать</a>
+        {% endif %}
+        {% if perms.products_app.delete_product %}
         <a href="{% url 'product_delete' product.pk %}" class="btn btn-delete">Удалить</a>
+        {% endif %}
         <a href="{% url 'product_list' %}" class="btn btn-secondary">Вернуться к списку товаров</a>
     </div>
 </div>

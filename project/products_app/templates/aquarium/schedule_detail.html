@@ -18,8 +18,12 @@
     <img src="{{ schedule.photo.url }}" alt="{{ schedule.name }}">
     {% endif %}
     <div class="detail-actions">
+        {% if perms.products_app.change_scheduleevent %}
         <a href="{% url 'schedule_update' schedule.pk %}" class="btn">Редактировать</a>
+        {% endif %}
+        {% if perms.products_app.delete_scheduleevent %}
         <a href="{% url 'schedule_delete' schedule.pk %}" class="btn btn-delete">Удалить</a>
+        {% endif %}
         <a href="{% url 'schedule_list' %}" class="btn btn-secondary">Вернуться к расписанию</a>
     </div>
 </div>

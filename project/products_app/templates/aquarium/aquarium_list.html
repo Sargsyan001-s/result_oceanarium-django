@@ -7,7 +7,9 @@
 
 {% block content %}
 <h1>Наши аквариумы</h1>
+{% if perms.products_app.add_aquarium %}
 <a href="{% url 'aquarium_create' %}" class="btn">Добавить новую позицию</a>
+{% endif %}
 <div class="item-list">
     {% for aquarium in aquarium_list %}
     <div class="item-card">
@@ -16,8 +18,12 @@
         {% endif %}
         <h3><a href="{% url 'aquarium_detail' aquarium.pk %}">{{ aquarium.name }}</a></h3>
         <p>{{ aquarium.description }}</p>
+        {% if perms.products_app.change_aquarium %}
         <a href="{% url 'aquarium_update' aquarium.pk %}">Редактировать</a>
+        {% endif %}
+        {% if perms.products_app.delete_aquarium %}
         <a href="{% url 'aquarium_delete' aquarium.pk %}">Удалить</a>
+        {% endif %}
     </div>
     {% endfor %}
 </div>
