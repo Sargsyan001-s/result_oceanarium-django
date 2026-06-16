@@ -7,6 +7,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
+from basket.forms import BasketAddProductForm
 
 # Create your views here.
 def info_view(request):
@@ -21,9 +22,6 @@ def contacts_view(request):
 
 def location_view(request):
     return render(request, "aquarium/location.html")
-
-def cart_view(request):
-    return render(request, "aquarium/cart.html")
 
 class CategoryListView(ListView):
     model = Category
@@ -64,6 +62,11 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = 'aquarium/products_detail.html'
     context_object_name = 'product'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form_basket'] = BasketAddProductForm()
+        return context
 
 @method_decorator(permission_required('products_app.add_product'), name='dispatch')
 class ProductCreateView(CreateView):

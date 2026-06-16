@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title_name %}
+Океанариум - Оформление заказа
+{% endblock %}
+
+{% block content %}
+<h1>Оформление заказа сувениров</h1>
+
+<form method="post" action="{% url 'basket_buy' %}">
+    {% csrf_token %}
+    {{ form_order.as_div }}
+    <button type="submit" class="btn btn-outline-primary">Подтвердить заказ</button>
+</form>
+
+<a href="{% url 'basket_detail' %}" class="btn btn-outline-dark">Обратно к корзине</a>
+{% endblock %}

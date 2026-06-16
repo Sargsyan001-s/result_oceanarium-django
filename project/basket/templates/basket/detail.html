@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title_name %}
+Океанариум - Ваша корзина
+{% endblock %}
+
+{% block content %}
+<div class="p-3">
+    <h1>Корзина сувениров</h1>
+
+    <table class="table table-bordered my-2">
+        <thead>
+            <tr>
+                <th>Изображение</th>
+                <th>Сувенир</th>
+                <th>Количество</th>
+                <th>Цена за шт.</th>
+                <th>Цена за позицию</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in basket %}
+            {% with item.product as product %}
+            <tr>
+                <td>
+                    {% if product.photo %}
+                    <img src="{{ product.photo.url }}" alt="{{ product.name }}"
+                         style="max-height:100px; max-width:100px; object-fit:contain; border-radius:20px;">
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
+                </td>
+                <td>{{ item.count }} шт.</td>
+                <td>{{ item.price }} руб.</td>
+                <td>{{ item.total_price }} руб.</td>
+                <td>
+                    <a href="{% url 'basket_remove' product.pk %}" class="btn btn-outline-danger">
+                        Убрать из корзины
+                    </a>
+                </td>
+            </tr>
+            {% endwith %}
+            {% empty %}
+            <tr>
+                <td colspan="6">Корзина пуста</td>
+            </tr>
+            {% endfor %}
+
+            <tr>
+                <td colspan="2"><strong>Всего:</strong></td>
+                <td>{{ basket|length }} шт.</td>
+                <td colspan="2"><strong>{{ basket.get_total_price }} руб.</strong></td>
+                <td>
+                    {% if basket|length > 0 %}
+                    <a href="{% url 'basket_clear' %}" class="btn btn-danger">Очистить корзину</a>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{% url 'product_list' %}" class="btn btn-outline-success">Назад к сувенирной лавке</a>
+
+    {% if user.is_authenticated and basket|length > 0 %}
+    <a href="{% url 'order_open' %}" class="btn btn-outline-primary">Оформить заказ</a>
+    {% elif not user.is_authenticated %}
+    <a href="{% url 'login_page' %}?next={% url 'basket_detail' %}" class="btn btn-outline-primary">
+        Войти для оформления заказа
+    </a>
+    {% endif %}
+</div>
+{% endblock %}

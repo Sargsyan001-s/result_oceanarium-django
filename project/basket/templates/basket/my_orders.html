@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title_name %}
+Океанариум - Мои заказы
+{% endblock %}
+
+{% block content %}
+<h1>Мои заказы</h1>
+
+{% if order_list %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Дата</th>
+            <th>Сумма</th>
+            <th>Способ получения</th>
+            <th>Адрес</th>
+            <th>Сувениры</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in order_list %}
+        <tr>
+            <td>{{ order.pk }}</td>
+            <td>{{ order.date_create }}</td>
+            <td>{{ order.price }} руб.</td>
+            <td>{{ order.get_delivery_type_display }}</td>
+            <td>{{ order.delivery_address }}</td>
+            <td>
+                {% for pos in order.pos_order_set.all %}
+                    {{ pos.product.name }} ({{ pos.count }} шт.){% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Заказов пока нет.</p>
+{% endif %}
+
+<a href="{% url 'product_list' %}" class="btn btn-secondary">К сувенирной лавке</a>
+<a href="{% url 'basket_detail' %}" class="btn btn-outline-primary">В корзину</a>
+{% endblock %}

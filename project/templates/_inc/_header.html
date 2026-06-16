@@ -17,13 +17,14 @@
                     <li><a href="/products/">Все товары</a></li>
                 </ul>
             </li>
-            <li><a href="/cart/">Корзина</a></li>
+            <li><a href="{% url 'basket_detail' %}">Корзина</a></li>
             <li><a href="/inhabitants/">Обитатели</a></li>
             <li><a href="/aquariums/">Аквариумы</a></li>
             <li><a href="/schedule/">Расписание</a></li>
         </ul>
         <div class="d-flex gap-2">
             {% if user.is_authenticated %}
+            <a href="{% url 'my_orders' %}" class="btn btn-outline-info btn-sm">Мои заказы</a>
             <a href="{% url 'logout_page' %}" class="btn btn-outline-secondary btn-sm">Выйти</a>
             {% else %}
             <a href="{% url 'login_page' %}" class="btn btn-outline-success btn-sm">Войти</a>

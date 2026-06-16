@@ -33,3 +33,11 @@ class EmployeeAdmin(admin.ModelAdmin):
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['pk', 'user', 'buyer_surname', 'price', 'date_create', 'delivery_type']
+
+@admin.register(Pos_order)
+class Pos_orderAdmin(admin.ModelAdmin):
+    list_display = ['pk', 'order', 'product', 'count', 'discount']

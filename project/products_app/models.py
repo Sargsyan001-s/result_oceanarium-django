@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 MAX_LENGTH = 255
 
@@ -148,3 +149,54 @@ class Ticket(models.Model):
     class Meta:
         verbose_name = 'Билет'
         verbose_name_plural = 'Билеты'
+
+
+class Order(models.Model):
+    SHOP = "SH"
+    COURIER = "CR"
+    PICKUPPOINT = "PP"
+
+    TYPE_DELIVERY = [
+        (SHOP, "Выдача в сувенирной лавке"),
+        (COURIER, "Курьер"),
+        (PICKUPPOINT, "Пункт выдачи"),
+    ]
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Пользователь',
+        related_name='orders'
+    )
+    buyer_firstname = models.CharField(max_length=MAX_LENGTH, verbose_name='Имя')
+    buyer_name = models.CharField(max_length=MAX_LENGTH, verbose_name='Отчество', null=True, blank=True)
+    buyer_surname = models.CharField(max_length=MAX_LENGTH, verbose_name='Фамилия')
+    comment = models.CharField(max_length=MAX_LENGTH, verbose_name='Комментарий', null=True, blank=True)
+    delivery_address = models.CharField(max_length=MAX_LENGTH, verbose_name='Адрес доставки')
+    delivery_type = models.CharField(max_length=2, choices=TYPE_DELIVERY, verbose_name='Способ получения')
+    price = models.FloatField(default=0, verbose_name='Сумма заказа')
+    date_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    date_finish = models.DateTimeField(null=True, blank=True, verbose_name='Дата завершения')
+
+    product = models.ManyToManyField(Product, through='Pos_order', verbose_name='Сувениры')
+
+    def __str__(self):
+        return f"#{self.pk} - {self.buyer_surname} {self.buyer_firstname} ({self.date_create})"
+
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
+
+
+class Pos_order(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Сувенир')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Заказ')
+    count = models.PositiveIntegerField(default=1, verbose_name='Количество')
+    discount = models.PositiveIntegerField(default=0, verbose_name='Скидка')
+
+    def __str__(self):
+        return f"Заказ #{self.order_id} - {self.product.name}"
+
+    class Meta:
+        verbose_name = 'Позиция заказа'
+        verbose_name_plural = 'Позиции заказов'

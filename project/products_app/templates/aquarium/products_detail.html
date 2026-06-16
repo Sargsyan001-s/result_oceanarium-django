@@ -18,6 +18,15 @@
     {% if product.photo %}
     <img src="{{ product.photo.url }}" alt="{{ product.name }}">
     {% endif %}
+    {% if user.is_authenticated and product.is_exists %}
+    <form method="post" action="{% url 'basket_add' product.pk %}">
+        {% csrf_token %}
+        {{ form_basket }}
+        <button type="submit" class="btn btn-success">Добавить в корзину</button>
+    </form>
+    {% elif not user.is_authenticated %}
+    <p>Для покупки сувенира необходимо <a href="{% url 'login_page' %}?next={{ request.path }}">войти</a>.</p>
+    {% endif %}
     <div class="detail-actions">
         {% if perms.products_app.change_product %}
         <a href="{% url 'product_update' product.pk %}" class="btn">Редактировать</a>
