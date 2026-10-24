@@ -21,6 +21,8 @@ services:
 
   web:
     build: ./web
+    ports:
+      - "8000:8000"
     container_name: django_app
     restart: always
     command: /app/entrypoint.sh

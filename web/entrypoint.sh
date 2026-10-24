@@ -1,5 +1,7 @@
 #!/bin/sh
 
+mkdir -p "${PROMETHEUS_MULTIPROC_DIR:-/tmp/prometheus_multiproc}"
+
 while ! nc -z $DB_HOST_PGSQL $DB_PORT; do
     sleep 1
 done

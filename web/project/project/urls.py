@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('products_app.urls')),
     path('basket/', include('basket.urls')),
-    path('api/',include('shop_api.urls'))
+    path('api/',include('shop_api.urls')),
+    path('', include('django_prometheus.urls'))
 ]
 
 if settings.DEBUG:
